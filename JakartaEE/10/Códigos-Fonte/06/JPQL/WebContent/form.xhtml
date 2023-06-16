@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>JPQL</title>
+</h:head>
+
+<body>
+	<h:form>
+		<h:panelGrid columns="3">
+			Query:
+			<h:inputTextarea value="#{formBean.jpql}" rows="5" cols="120" />
+			<h:commandButton value="Executar" action="#{formBean.executar}" />
+		</h:panelGrid>
+		<br /><hr /><br />
+		<h:panelGrid columns="2">
+			Resultado:
+			<h:inputTextarea value="#{formBean.result}" style="font-size: 11px;" rows="10" cols="120" readonly="true" />
+		</h:panelGrid>
+	</h:form>
+</body>
+</html>

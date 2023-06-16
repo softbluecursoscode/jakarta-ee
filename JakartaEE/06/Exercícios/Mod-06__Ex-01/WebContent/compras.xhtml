@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Lista de Compras</title>
+	
+	<style>
+		.riscado {
+			text-decoration: line-through;
+		}
+		
+		.erro {
+			color: red;
+		}
+		
+		table.tabela {
+			text-align: center;
+			font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+			font-weight: normal;
+			font-size: 11px;
+			color: #fff;
+			width: 450px;
+			background-color: #666;
+			border: 0px;
+			border-collapse: collapse;
+			border-spacing: 0px;
+		}
+
+		table.tabela td {
+			background-color: #CCC;
+			color: #000;
+			padding: 4px;
+			text-align: left;
+			border: 1px #fff solid;
+			width: 150px;
+		}
+	</style>
+</h:head>
+
+<body>
+
+<h:form>
+
+<h:panelGrid columns="3">
+	Produto:
+	<h:inputText id="produto" value="#{compraBean.compra.produto}" size="15" required="true" requiredMessage="Preencha o nome do produto">
+		<!-- A validação é feita por uma requisição AJAX, disparada assim que o foco sai do componente -->
+		<f:ajax event="blur" execute="@this" render="erroProduto" />
+	</h:inputText>
+	<h:message id="erroProduto" for="produto" styleClass="erro" />
+	
+	Quantidade:
+	<h:inputText id="quantidade" value="#{compraBean.compra.quantidade}" size="3" required="true"
+		requiredMessage="Preencha a quantidade" converterMessage="Número inválido">
+		<!-- A validação é feita por uma requisição AJAX, disparada assim que o foco sai do componente -->
+		<f:ajax event="blur" execute="@this" render="erroQuantidade" />
+	</h:inputText>
+	<h:message id="erroQuantidade" for="quantidade" styleClass="erro" />
+	
+	<h:commandButton value="Adicionar" actionListener="#{compraBean.adicionar}">
+		<!-- 
+			A requisição AJAX será feita quando um action event for disparado. Os componentes do formulário serão enviados para o servidor
+			para serem processados, e no retorno da requisição a tabela é renderizada (para que o novo item apareça), bem como o próprio 
+			formulário (para que os dados digitados sejam apagados).
+		 -->
+		<f:ajax event="action" execute="@form" render="tabela @form" />
+	</h:commandButton>
+</h:panelGrid>
+
+<h:dataTable id="tabela" value="#{compraBean.compras}" var="c" styleClass="tabela">
+	<h:column>
+		<h:selectBooleanCheckbox value="#{c.marcado}" immediate="true">
+			<!-- Aqui é preciso utilizar @form porque refereciar o ID 'tabela' não funciona -->
+			<f:ajax event="change" render="@form" />
+		</h:selectBooleanCheckbox>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			Produto
+		</f:facet>
+		<h:outputText value="#{c.produto}" rendered="#{!c.marcado}" />
+		<h:outputText styleClass="riscado" value="#{c.produto}" rendered="#{c.marcado}" />
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			Quantidade
+		</f:facet>
+		<h:outputText value="#{c.quantidade}" rendered="#{!c.marcado}" />
+		<h:outputText styleClass="riscado" value="#{c.quantidade}" rendered="#{c.marcado}" />
+	</h:column>
+</h:dataTable>
+</h:form>
+
+</body>
+</html>

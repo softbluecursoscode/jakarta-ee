@@ -1,0 +1,85 @@
+.tabela {
+     border: 1px solid blue;
+}
+ 
+.cabecalho {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   font-weight: bold;
+   color: Snow;
+   background: #000099;
+}
+
+.colNumero {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   background: #3969EE;
+   padding: 3px;
+   width: 30px;
+}
+
+.colTitulo {
+   text-align: left;
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   background: #3366CC;
+   padding: 3px;
+   width: 200px;
+}
+
+.colAutor {
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   text-align: left;
+   background: #3969EE;
+   padding: 3px;
+   width: 200px;
+}
+
+.colEditora {
+   text-align: left;
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   background: #3366CC;
+   padding: 3px;
+   width: 200px;
+}
+
+.colPaginas {
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   text-align: center;
+   background: #3969EE;
+   padding: 3px;
+   width: 100px;
+}
+
+.colOp {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   color: Snow;
+   background: #3366CC;
+   padding: 3px;
+   width: 100px;
+}
+
+.smallInput {
+	width: 85px;
+}
+
+.bigInput {
+	width: 180px;
+}
+
+.message {
+	font: 13px Arial, sans-serif;
+	font-weight: bold;
+	color: red;
+}
+
+a {
+	font: 13px Arial, sans-serif;
+	color: Snow;
+	font-weight: bold;
+}

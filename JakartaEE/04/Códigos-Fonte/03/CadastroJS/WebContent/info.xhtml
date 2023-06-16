@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Cadastro de Usuário</title>
+</h:head>
+
+<h:body>
+	<h:panelGrid columns="2">
+		<f:facet name="header">
+			Cadastro de Usuário
+		</f:facet>
+		
+		<h:outputText value="Nome:" />
+		<h:outputText value="#{cadastro.nome}" />
+		
+		<h:outputText value="E-mail:" />
+		<h:outputText value="#{cadastro.email}" />
+		
+		<h:outputText value="Senha:" />
+		<h:outputText value="#{cadastro.senha1}" />
+		
+		<h:outputText value="Confirmação de senha:" />
+		<h:outputText value="#{cadastro.senha2}" />
+		
+		<h:outputText value="Sexo:" />
+		<h:outputText value="Masculino" rendered="#{cadastro.sexo == 'M'}" />
+		<h:outputText value="Feminino" rendered="#{cadastro.sexo == 'F'}" />
+		
+		<h:outputText value="Deseja receber e-mails?" />
+		<h:outputText value="Sim" rendered="#{cadastro.receberEmails}" />
+		<h:outputText value="Não" rendered="#{!cadastro.receberEmails}" />
+		
+		<h:outputText value="Observações:" />
+		<h:outputText value="#{cadastro.observacoes}" />
+		
+		<h:outputText value="Linguagens de programação:" />
+		<h:outputText value="#{cadastro.linguagensAsString}" />
+	</h:panelGrid>
+
+</h:body>
+</html>

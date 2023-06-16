@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro de Usuário</title>
+	
+	<script>
+		function verificarSenhas() {
+			var senha1 = document.getElementById("f:s1").value;
+			var senha2 = document.getElementById("f:s2").value;
+			
+			if (senha1 == senha2) {
+				return true;
+			}
+			
+			alert("Senhas são diferentes");
+			return false;
+		}
+	</script>
+</h:head>
+
+<h:body>
+	<h:form id="f">
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				Cadastro de Usuário
+			</f:facet>
+		
+		Nome:
+		<h:inputText value="#{cadastro.nome}" />
+		
+		E-mail:
+		<h:inputText value="#{cadastro.email}" />
+		
+		Senha:
+		<h:inputSecret id="s1" value="#{cadastro.senha1}" />
+		
+		Confirmação de senha:
+		<h:inputSecret id="s2" value="#{cadastro.senha2}" />
+		
+		Sexo:
+		<h:selectOneRadio value="#{cadastro.sexo}">
+			<f:selectItem itemValue="M" itemLabel="Masculino" />
+			<f:selectItem itemValue="F" itemLabel="Feminino" />
+		</h:selectOneRadio>
+		
+		Deseja receber e-mails?
+		<h:selectBooleanCheckbox value="#{cadastro.receberEmails}" />
+		
+		Observações:
+		<h:inputTextarea value="#{cadastro.observacoes}" rows="4" cols="30" />
+		
+		Linguagens de programação:
+		<h:selectManyCheckbox value="#{cadastro.linguagens}">
+			<f:selectItems value="#{cadastro.listaLinguagens}" var="l"
+				itemValue="#{l.id}" itemLabel="#{l.nome}" />
+		</h:selectManyCheckbox>
+
+		</h:panelGrid>
+
+		<h:commandButton value="Cadastrar" action="info" onclick="return verificarSenhas();" />
+	</h:form>
+</h:body>
+
+</html>

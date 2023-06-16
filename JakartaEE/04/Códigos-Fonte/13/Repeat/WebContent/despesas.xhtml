@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro de Despesas</title>
+</h:head>
+
+<body>
+<h:outputStylesheet library="css" name="styles.css" />
+
+<h:form>
+
+<h:panelGroup rendered="#{table.despesas.size() > 0}">
+	<table class="tabela">
+		<tr>
+			<th class="cabecalho" colspan="5">Lista de Despesas</th>
+		</tr>
+		<tr>
+			<th class="cabecalho">#</th>
+			<th class="cabecalho">Data</th>
+			<th class="cabecalho">Descrição</th>
+			<th class="cabecalho">Valor</th>
+			<th class="cabecalho">Operação</th>
+		</tr>
+		<ui:repeat value="#{table.despesas}" var="d" varStatus="st">
+			<tr>
+				<td class="colNumero">#{st.index + 1}</td>
+				
+				<td class="colData">
+					<h:outputText value="#{d.data}" rendered="#{!d.edit}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+					<h:inputText value="#{d.data}" rendered="#{d.edit}" styleClass="smallInput">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+				</td>
+				
+				<td class="colDesc">
+					<h:outputText value="#{d.descricao}" rendered="#{!d.edit}" />
+					<h:inputText value="#{d.descricao}" rendered="#{d.edit}" styleClass="bigInput" />
+				</td>
+				
+				<td class="colValor">
+					<h:outputText value="#{d.valor}" rendered="#{!d.edit}">
+						<f:convertNumber type="currency" locale="pt_BR" />
+					</h:outputText>
+					<h:inputText value="#{d.valor}" rendered="#{d.edit}" styleClass="smallInput" />
+				</td>
+				
+				<td class="colOp">
+					<h:panelGroup rendered="#{!d.edit}">
+						<h:commandLink value="Alterar" action="#{table.editar(d)}" /> | 
+				    	<h:commandLink value="Excluir" action="#{table.excluir(d)}" />
+					</h:panelGroup>
+					<h:commandLink value="Gravar" action="#{table.gravar(d)}" rendered="#{d.edit}" />
+				</td>
+			</tr>
+		</ui:repeat>
+	</table>
+</h:panelGroup>
+
+<h:panelGroup rendered="#{table.despesas.size() == 0}">
+	<h:outputText value="Não existem despesas cadastradas" styleClass="message" /><br /><br />
+</h:panelGroup>
+
+<h:commandButton value="Inserir" action="#{table.inserir}" />
+</h:form>
+
+</body>
+</html>

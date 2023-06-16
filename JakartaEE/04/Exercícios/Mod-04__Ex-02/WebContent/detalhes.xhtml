@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro</title>
+</h:head>
+
+<body>
+	<h:panelGrid columns="3" border="1">
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				Dados Pessoais
+			</f:facet>
+		
+			Nome:
+			<h:outputText value="#{cadastro.pessoa.nome}" />
+			
+			E-mail:
+			<h:outputText value="#{cadastro.pessoa.email}" />
+			
+			Data de nascimento:
+			<h:outputText value="#{cadastro.pessoa.dataNascimento}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+			
+			Rua:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.rua}" />
+			
+			Número:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.numero}" />
+			
+			Complemento:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.complemento}" />
+			
+			Bairro:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.bairro}" />
+			
+			CEP:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.cep}" />
+			
+			Cidade:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.cidade}" />
+			
+			Estado:
+			<h:outputText value="#{cadastro.pessoa.enderecoResidencial.estado.sigla}" />
+			
+			Telefone residencial:
+			<h:outputText value="(#{cadastro.pessoa.telefoneResidencial.ddd}) #{cadastro.pessoa.telefoneResidencial.numero}"  />
+			
+			Telefone celular:
+			<h:outputText value="(#{cadastro.pessoa.telefoneCelular.ddd}) #{cadastro.pessoa.telefoneCelular.numero}"  />
+		</h:panelGrid>
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				Dados Comerciais
+			</f:facet>
+		
+			Nome da Empresa:
+			<h:outputText value="#{cadastro.pessoa.nomeEmpresa}" />
+			
+			Cargo:
+			<h:outputText value="#{cadastro.pessoa.cargo}" />
+			
+			Salário:
+			<h:outputText value="#{cadastro.pessoa.salario}">
+				<f:convertNumber type="currency" locale="pt_BR" />
+			</h:outputText>
+			
+			Rua:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.rua}" />
+			
+			Número:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.numero}" />
+			
+			Complemento:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.complemento}" />
+			
+			Bairro:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.bairro}" />
+			
+			CEP:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.cep}" />
+			
+			Cidade:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.cidade}" />
+			
+			Estado:
+			<h:outputText value="#{cadastro.pessoa.enderecoComercial.estado.sigla}" />
+			
+			Telefone comercial:
+			<h:outputText value="(#{cadastro.pessoa.telefoneComercial.ddd}) #{cadastro.pessoa.telefoneComercial.numero}"  />
+		</h:panelGrid>
+		<h:panelGrid columns="1">
+			<f:facet name="header">
+				Áreas de Interesse
+			</f:facet>
+		
+			<h:selectManyCheckbox value="#{cadastro.pessoa.interesses}" layout="pageDirection" readonly="true">
+				<f:selectItems value="#{cadastro.interesses}" var="i" itemValue="#{i.id}" itemLabel="#{i.area}"  />
+			</h:selectManyCheckbox>
+		</h:panelGrid>
+	</h:panelGrid>
+</body>
+</html>

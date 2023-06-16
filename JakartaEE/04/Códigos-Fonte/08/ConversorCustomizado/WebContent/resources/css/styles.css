@@ -1,0 +1,26 @@
+.label {
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.error {
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: red;
+}
+
+input.text {
+	background-color: #FFFFCC;
+	width: 120px;
+	font: 12px Verdana, sans-serif;
+	color: #003399;
+	border: 1px solid #000000;
+	padding-left: 3px;
+}
+
+input.button {
+	background-color: #EEEEEE;
+	font: 12px Verdana, sans-serif;
+}

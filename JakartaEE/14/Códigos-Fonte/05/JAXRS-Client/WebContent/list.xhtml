@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>Músicas</title>
+</h:head>
+
+<body>
+	<h:form>
+		<h1>Músicas Cadastradas</h1>
+		<h:commandButton value="Listar" action="#{formBean.list}" />
+		
+		<h:panelGroup rendered="#{formBean.songs.size() > 0}">
+			<ul>
+				<ui:repeat var="s" value="#{formBean.songs}">
+					<li>#{s.id} => #{s.name} (#{s.singer})</li>
+				</ui:repeat>
+			</ul>
+		</h:panelGroup>
+	</h:form>
+</body>
+</html>

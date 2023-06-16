@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Pedidos</title>
+	
+	<style type="text/css">
+		.table {
+			font-family: verdana;
+			font-size:11px;
+			color:#333333;
+			border-width: 1px;
+			border-color: #666666;
+			border-collapse: collapse;
+		}
+		.header {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #dedede;
+		}
+		.column {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #ffffff;
+		}
+		
+		.sizeSmall {
+			width: 70px;
+		}
+		
+		.sizeLarge {
+			width: 170px;
+		}
+		
+		.alignLeft {
+			text-align: left;
+		}
+		
+		.alignCenter {
+			text-align: center;
+		}
+	</style>
+</h:head>
+
+<body>
+<h:form>
+
+<h:commandButton value="Novo Pedido" action="pedido?faces-redirect=true" />
+<br /><br />
+
+<h:dataTable value="#{listPedidosBean.pedidos}" var="p" styleClass="table" headerClass="header" rendered="#{listPedidosBean.pedidos.size() > 0}"
+	columnClasses="column sizeSmall alignCenter,column sizeLarge alignLeft,column sizeLarge alignLeft,column sizeSmall alignCenter,column sizeLarge alignLeft, column sizeLarge alignCenter,column sizeSmall alignCenter">
+	<f:facet name="header">Lista de Pedidos</f:facet>
+	
+	<h:column>
+		<f:facet name="header">Data</f:facet>
+		<h:outputText value="#{p.data}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Cliente</f:facet>
+		<h:outputText value="#{p.cliente.nome}" />
+	</h:column>
+	<h:column>	
+		<f:facet name="header">E-mail</f:facet>
+		<h:outputText value="#{p.cliente.email}" />
+	</h:column>
+	<h:column>	
+		<f:facet name="header">Valor</f:facet>
+		<h:outputText value="#{p.valorTotal}">
+			<f:convertNumber type="currency" locale="pt_BR" />
+		</h:outputText>
+	</h:column>
+	<h:column>	
+		<f:facet name="header">Produtos</f:facet>
+		<ui:repeat var="pr" value="#{p.produtos}">
+			<h:outputText value="#{pr.nome} - #{formatterBean.formatarMoeda(pr.valor)}" />
+			<br />
+		</ui:repeat>
+	</h:column>
+	<h:column>	
+		<f:facet name="header">Pagar</f:facet>
+		<h:panelGroup rendered="#{p.pagamento == null}">
+			<h:commandLink value="Boleto" action="#{listPedidosBean.pagar(p.id, 'BOLETO')}" />
+			 | 
+			<h:commandLink value="Cartão Crédito" action="#{listPedidosBean.pagar(p.id, 'CARTAO_CREDITO')}" />
+		</h:panelGroup>
+		<h:outputText value="#{p.pagamento.tipoPagto}" rendered="#{p.pagamento != null}" />
+	</h:column>
+	<h:column>	
+		<f:facet name="header">Excluir</f:facet>
+		<h:commandLink value="Excluir" action="#{listPedidosBean.excluir(p.id)}" />
+	</h:column>
+</h:dataTable>
+
+</h:form>
+</body>
+</html>

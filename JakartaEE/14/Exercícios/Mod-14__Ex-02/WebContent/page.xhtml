@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>WebServices</title>
+</h:head>
+
+<body>
+	<ui:debug hotkey="o" />
+
+	<h:form>
+		<h1>Gerador de Números Randômicos</h1>
+
+		<h:messages />
+
+		<table>
+			<tr>
+				<td>Mínimo:</td>
+				<td><h:inputText value="#{pageBean.min}" /></td>
+			</tr>
+			<tr>
+				<td>Máximo:</td>
+				<td><h:inputText value="#{pageBean.max}" /></td>
+			</tr>
+			<tr>
+				<td>Quantidade:</td>
+				<td><h:inputText value="#{pageBean.qtde}" /></td>
+			</tr>
+		</table>
+
+		<h:commandButton value="Gerar" action="#{pageBean.gerar}" />
+		
+		<hr />
+		
+		<h:inputTextarea value="#{pageBean.result}" rows="3" cols="150" />
+	</h:form>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>WebSockets</title>
+	
+	<script type="text/javascript">
+		window.onload = connect;
+	
+		var websocket;
+		function connect() {
+			websocket = new WebSocket("ws://localhost:8080/WebSocketsEncodersDecoders/notification");
+			
+			websocket.onopen = function(event) {
+				console.log("onopen()");
+			};
+			
+			websocket.onmessage = function(event) {
+				console.log("onmessage()");
+
+				var json = JSON.parse(event.data);
+				document.getElementById("time").innerHTML = json.time;
+				document.getElementById("id").innerHTML = json.assignedId;
+			};
+			
+			websocket.onerror = function(event) {
+				console.log("onerror()");
+			};
+		}
+		
+		function closeWebsocket() {
+			websocket.close();
+		}
+
+		function send() {
+			var titleElem = document.getElementById("title");
+			var contentElem = document.getElementById("content");
+			
+			var json = { "title" : titleElem.value, "content" : contentElem.value };
+			
+			websocket.send(JSON.stringify(json));
+			
+			titleElem.value = "";
+			contentElem.value = "";
+		}
+	</script>
+</h:head>
+
+<body>
+	<h1>Notificações</h1>
+	
+	<h3>Envio</h3>
+	<table>
+		<tr>
+			<td>Título:</td>
+			<td><input id="title" type="text" /></td>
+		</tr>
+		<tr>
+			<td>Conteúdo:</td>
+			<td><input id="content" type="text" /></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="button" value="Enviar" onclick="send();" /></td>
+		</tr>
+	</table>
+	
+	<h3>Resposta</h3>
+	<table>
+		<tr>
+			<td>Horário:</td>
+			<td><b><span id="time" /></b></td>
+		</tr>
+		<tr>
+			<td>ID:</td>
+			<td><b><span id="id" /></b></td>
+		</tr>
+	</table>
+</body>
+</html>

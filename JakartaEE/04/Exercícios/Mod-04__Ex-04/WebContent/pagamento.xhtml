@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Pagamento</title>
+</h:head>
+
+<body>
+<h:form>
+	<h:panelGrid columns="3">
+		Bandeira:
+		<h:selectOneMenu id="bandeira" value="#{bean.bandeira}" style="width: 200px;">
+			<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+			<f:selectItems value="#{bean.bandeiras}" />
+		</h:selectOneMenu>
+		<h:message for="bandeira" />
+		
+		Número do cartão:
+		<h:inputText id="numeroCartao" value="#{bean.numeroCartao}" style="width: 200px;" />
+		<h:message for="numeroCartao" />
+		
+		Nome (como consta no cartão de crédito):
+		<h:inputText id="nome" value="#{bean.nome}" style="width: 200px;" />
+		<h:message for="nome" />
+		
+		Data de validade (mm/aaaa):
+		<h:inputText id="dataValidade" value="#{bean.dataValidade}" style="width: 200px;">
+			<f:convertDateTime pattern="MM/yyyy" />
+		</h:inputText>
+		<h:message for="dataValidade" />
+		
+		Valor da compra (R$):
+		<h:inputText id="valor" value="#{bean.valor}" style="width: 200px;">
+			<f:convertNumber locale="pt_BR" maxFractionDigits="2" minFractionDigits="2" />
+		</h:inputText>
+		<h:message for="valor" />
+	</h:panelGrid>
+
+	<h:commandButton value="Processar" action="#{bean.processar}" />
+</h:form>
+</body>
+</html>

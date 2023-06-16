@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>PickList</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:growl id="msg" />
+		<p:pickList value="#{colorBean.colors}" var="c" itemLabel="#{c}" itemValue="#{c}"
+			showSourceControls="true" showTargetControls="true">
+		
+			<f:facet name="sourceCaption">Cores Disponíveis</f:facet>
+			<f:facet name="targetCaption">Cores Selecionadas</f:facet>
+			
+			<p:ajax event="transfer" listener="#{colorBean.onTransfer}" update="msg" />
+		</p:pickList>
+		<br/>
+		<p:commandButton value="Dialog" oncomplete="PF('dialog').show()" update="panel" />
+		
+		<p:dialog widgetVar="dialog" resizable="false" modal="true" >
+			<h:panelGrid columns="1" id="panel">
+				<ui:repeat var="c" value="#{colorBean.colors.target}">
+					<h:outputText value="#{c}" /><br />
+				</ui:repeat>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+
+</html>

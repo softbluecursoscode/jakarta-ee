@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>Segurança em EJBs</title>
+</h:head>
+
+<body>
+	<h1>Método a ser chamado</h1>
+	<h2>Usuário logado: #{pageBean.loggedUser}</h2>
+	
+	<h:form>
+		Método para chamar: 
+		<h:selectOneMenu value="#{pageBean.selectedMetodo}">
+			<f:selectItems value="#{pageBean.metodos}" />
+		</h:selectOneMenu>
+	
+		<br /><br />
+		
+		<h:commandButton value="Chamar" action="#{pageBean.submit}" />
+		
+		<h:panelGroup rendered="#{pageBean.result != null}">
+			<br /><br /><h4>#{pageBean.result}</h4>
+		</h:panelGroup>
+	</h:form>
+</body>
+</html>

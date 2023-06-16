@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:messages showDetail="true" showSummary="false" closable="true" globalOnly="true" severity="info" />
+		<p:panel header="Dados Pessoais">
+			<h:panelGrid columns="3">
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" value="#{cadastroBean.cliente.nome}" required="true" requiredMessage="O nome deve ser preenchido" />
+				<p:message for="nome" display="both" />
+				
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputMask id="cpf" value="#{cadastroBean.cliente.cpf}" mask="999.999.999-99" required="true" requiredMessage="O CPF deve ser preenchido" />
+				<p:message for="cpf" display="both" />
+				
+				<p:outputLabel for="dataNasc" value="Data de Nascimento:" />
+				<p:calendar id="dataNasc" value="#{cadastroBean.cliente.dataNasc}" required="true" requiredMessage="A data de nascimento deve ser preenchida" />
+				<p:message for="dataNasc" display="both" />
+				
+				<p:outputLabel for="salario" value="Salário:" />
+				<p:inputNumber id="salario" value="#{cadastroBean.cliente.salario}" decimalPlaces="2" decimalSeparator="," thousandSeparator="." symbol="R$ " symbolPosition="p"
+					required="true" requiredMessage="O salário deve ser preenchido" />
+				<p:message for="salario" display="both" />
+				
+				<p:outputLabel for="casado" value="Casado:" />
+				<p:inputSwitch id="casado" value="#{cadastroBean.cliente.casado}" onLabel="Sim" offLabel="Não" />
+				<p:message for="casado" display="both" />
+				
+				<p:outputLabel for="interesses" value="Interesses:" />
+				<p:selectCheckboxMenu id="interesses" label="Interesses" value="#{cadastroBean.cliente.interesses}" multiple="true" 
+					filter="true" filterMatchMode="startsWith" style="width: 250px">
+					<f:selectItems value="#{cadastroBean.interesses}" />
+				</p:selectCheckboxMenu>
+				<p:message for="interesses" display="both" />
+				
+			</h:panelGrid>
+			
+			<p:commandButton value="Cadastrar" action="#{cadastroBean.cadastrar}" style="margin: 10px;" update="form" icon="ui-icon-check" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

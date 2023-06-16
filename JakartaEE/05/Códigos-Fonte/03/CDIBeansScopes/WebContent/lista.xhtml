@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+
+<body>
+	<h:form id="form">
+		<h:panelGrid columns="4">
+			Item:
+			<h:inputText value="#{listaBean.item}" />
+			<h:commandButton value="Adicionar" action="#{listaBean.adicionar}" />
+			<h:commandButton value="Remover Tudo" action="#{listaBean.removerTudo}" />
+		</h:panelGrid>
+	</h:form>
+	<hr />
+	
+	<ol>
+	<ui:repeat value="#{listaBean.itens}" var="i">
+		<li>#{i}</li>
+	</ui:repeat>
+	</ol>
+</body>
+</html>

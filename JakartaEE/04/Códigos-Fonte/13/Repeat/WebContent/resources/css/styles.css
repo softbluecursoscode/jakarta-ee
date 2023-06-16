@@ -1,0 +1,69 @@
+.tabela {
+     border: 1px solid green;
+}
+ 
+.cabecalho {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   font-weight: bold;
+   color: Snow;
+   background: #008B45;
+}
+
+.colNumero {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   background: #BCEE68;
+   padding: 3px;
+   width: 30px;
+}
+
+.colData {
+   text-align: center;
+   font: 13px Arial, sans-serif;
+   background: #A2CD5A;
+   padding: 3px;
+   width: 100px;
+}
+
+.colDesc {
+   font: 13px Arial, sans-serif;
+   text-align: left;
+   background: #BCEE68;
+   padding: 3px;
+   width: 200px;
+}
+
+.colValor {
+   text-align: right;
+   font: 13px Arial, sans-serif;
+   background: #A2CD5A;
+   padding: 3px;
+   width: 100px;
+}
+
+.colOp {
+   font: 13px Arial, sans-serif;
+   text-align: center;
+   background: #BCEE68;
+   padding: 3px;
+   width: 120px;
+}
+
+.smallInput {
+	width: 85px;
+}
+
+.bigInput {
+	width: 180px;
+}
+
+.formLabel {
+	font: 13px Arial, sans-serif;
+}
+
+.message {
+	font: 13px Arial, sans-serif;
+	font-weight: bold;
+	color: red;
+}

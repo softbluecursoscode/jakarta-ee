@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>WebSockets</title>
+	
+	<script type="text/javascript">
+		var websocket;
+		function connect() {
+			websocket = new WebSocket("ws://localhost:8080/WebSocketsChat/chat");
+			
+			websocket.onopen = function(event) {
+				console.log("onopen()");
+				
+				var msg = "!C!" + document.getElementById("name").value;
+				websocket.send(msg);
+				
+				document.getElementById("chat").style.display = "block";
+				document.getElementById("name").disabled = true;
+				document.getElementById("btnConnect").disabled = true;
+				document.getElementById("message").focus();
+			};
+			
+			websocket.onmessage = function(event) {
+				console.log("onmessage()");
+				
+				var elem = document.getElementById("messages");
+				elem.value += event.data + "\n";
+			};
+			
+			websocket.onerror = function(event) {
+				console.log("onerror");
+			};
+		}
+		
+		function closeWebsocket() {
+			websocket.close();
+			
+			document.getElementById("chat").style.display = "none";
+			document.getElementById("messages").value = "";
+			document.getElementById("name").disabled = false;
+			document.getElementById("name").value = "";
+			document.getElementById("name").focus();
+			document.getElementById("btnConnect").disabled = false;
+		}
+
+		function sendMessage() {
+			var elem = document.getElementById("message");
+			websocket.send(elem.value);
+			
+			elem.value = "";
+			elem.focus();
+		}
+	</script>
+</h:head>
+
+<body>
+	Nome: <input id="name" type="text" /> <input type="button" id="btnConnect" value="Conectar" onclick="connect();" />
+	
+	<div id="chat" style="display: none;">
+		<br /><br />
+		<textarea id="messages" rows="30" cols="100" readonly="readonly" />
+		<br/><br />
+		Mensagem: <input id="message" type="text" />&nbsp;&nbsp;<input type="button" value="Enviar" onclick="sendMessage();" />
+		<input type="button" value="Sair" onclick="closeWebsocket();" />
+	</div>	
+</body>
+</html>

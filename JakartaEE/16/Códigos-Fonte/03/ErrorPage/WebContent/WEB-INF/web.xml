@@ -1,0 +1,15 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error.faces</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/notfound.faces</location>
+	</error-page>
+</web-app>
